@@ -26,7 +26,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^8.46.0",
     "typescript": "^5.1.6",
-    "unocss": "^0.54.0",
+    "unocss": "^0.55.3",
     "unplugin-auto-import": "^0.16.6",
     "unplugin-icons": "^0.16.5",
     "vite": "^4.4.7",
