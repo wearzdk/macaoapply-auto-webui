@@ -15,6 +15,7 @@ export default defineConfig({
       brand: '#5657F5',
       primary: '#5657F5',
       secondary: '#A7B1F5',
+
     },
   },
   shortcuts: {
