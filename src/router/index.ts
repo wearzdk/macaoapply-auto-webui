@@ -1,5 +1,5 @@
 import type { RouteRecordRaw, Router } from 'vue-router'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from 'nprogress'
 
 // 设置NProgress样式
@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router: Router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE),
+  history: createWebHashHistory(import.meta.env.VITE_BASE),
   routes,
 })
 

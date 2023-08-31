@@ -29,6 +29,8 @@ export interface UserConfig {
 export interface AppointmentConfig {
   plateNumber: string
   appointmentDate: number
+  startTime: number
+  endTime: number
 }
 
 export interface AppConfig {
@@ -67,8 +69,31 @@ function doRestart() {
   })
 }
 
+function doQuit() {
+  return fetch(`${BaseUrl}/api/v1/quit`, {
+    method: 'POST',
+  })
+}
+
+function doStart() {
+  return fetch(`${BaseUrl}/api/v1/start`, {
+    method: 'POST',
+  })
+}
+
+function getStatus() {
+  return fetch(`${BaseUrl}/api/v1/status`, {
+    method: 'GET',
+  }).then((res) => { return res.json() }) as Promise<R<{
+    running: boolean
+  }>>
+}
+
 export {
   fetchConfig,
   setConfig,
   doRestart,
+  doQuit,
+  doStart,
+  getStatus,
 }

@@ -3,20 +3,38 @@ import { formatDate } from '@vueuse/core'
 import { type AppConfig, fetchConfig, setConfig } from '../api/config'
 
 const config = ref<AppConfig>()
-const dateStr = ref<string>('')
-watch(dateStr, (val) => {
+
+const dateForm = reactive({
+  dateStr: '',
+  startTime: '',
+  endTime: '',
+})
+watch(dateForm, () => {
   if (!config?.value)
     return
-  const date = new Date(val)
+  console.log(dateForm)
+
+  const date = new Date(dateForm.dateStr)
   // unix
   config.value.appointment.appointmentDate = date.getTime() / 1000
   console.log(config.value.appointment.appointmentDate)
+
+  // HH:mm
+  const startTime = dateForm.startTime.split(':')
+  // const endTime = dateForm.endTime.split(':')
+
+  const today = new Date()
+  console.log(today)
+  config.value.appointment.startTime = Math.floor(today.setHours(Number(startTime[0]), Number(startTime[1])) / 1000)
+  // config.value.appointment.endTime = Math.floor(today.setHours(Number(endTime[0]), Number(endTime[1])) / 1000)
 })
 
 onMounted(async () => {
   config.value = (await fetchConfig()).data
   const date = new Date(config.value.appointment.appointmentDate * 1000)
-  dateStr.value = formatDate(date, 'YYYY/MM/DD')
+  dateForm.dateStr = formatDate(date, 'YYYY-MM-DD')
+  dateForm.startTime = formatDate(new Date(config.value.appointment.startTime * 1000), 'HH:mm')
+  // dateForm.endTime = formatDate(new Date(config.value.appointment.endTime * 1000), 'HH:mm')
 })
 const saveTip = refAutoReset('', 2000)
 
@@ -78,8 +96,16 @@ async function saveConfig() {
       </label>
       <label for="">
         <span>申请日期</span>
-        <input v-model="dateStr" type="text" placeholder="示例：2023/09/02">
+        <input v-model="dateForm.dateStr" type="date" placeholder="示例：2023/09/02">
       </label>
+      <label for="">
+        <span>开始时间</span>
+        <input v-model="dateForm.startTime" type="time">
+      </label>
+      <!-- <label for="">
+        <span>结束时间</span>
+        <input v-model="dateForm.endTime" type="time">
+      </label> -->
     </div>
     <!-- 保存 -->
     <div class="flex">
