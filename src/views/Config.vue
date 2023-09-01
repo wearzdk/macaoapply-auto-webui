@@ -16,6 +16,7 @@ watch(dateForm, () => {
 
   const date = new Date(dateForm.dateStr)
   // unix
+  date.setHours(0, 0, 0, 0)
   config.value.appointment.appointmentDate = date.getTime() / 1000
   console.log(config.value.appointment.appointmentDate)
 
