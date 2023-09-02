@@ -3,6 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Logs from '../components/Logs.vue'
 import { doQuit, doRestart, doStart } from '../api/config'
+import { isShowSetting, port } from '../store'
 import Config from './Config.vue'
 
 const logInst = ref<InstanceType<typeof Logs>>()
@@ -13,7 +14,7 @@ function addLog(content: string) {
 
 // 日志 ws
 let websocket: WebSocket
-const wsUrl = 'ws://localhost:12369/ws'
+const wsUrl = `ws://${location.hostname}:${port.value}/ws`
 function createWebSocket() {
   try {
     websocket = new WebSocket(wsUrl)
@@ -66,7 +67,7 @@ createWebSocket()
             功能
           </h4>
         </div>
-        <div class="mt-2 flex children:mr-10px">
+        <div class="mt-2 flex children:mr-10px flex-wrap">
           <button
             class="btn-base btn-primary px-3 py-2 "
             @click="doRestart()"
@@ -84,6 +85,13 @@ createWebSocket()
             @click="doQuit()"
           >
             停止
+          </button>
+          <!-- 修改端口 -->
+          <button
+            class="btn-base btn-primary px-3 py-2 "
+            @click="isShowSetting = true"
+          >
+            修改端口
           </button>
         </div>
       </div>

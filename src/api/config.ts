@@ -1,3 +1,5 @@
+import { port } from '../store'
+
 export interface CjyConfig {
   username: string
   password: string
@@ -37,9 +39,16 @@ export interface AppConfig {
   cjy: CjyConfig
   user: UserConfig
   appointment: AppointmentConfig
+  ua: string
+  port: string
+  speed: number
 }
 
-const BaseUrl = 'http://localhost:12369'
+const localUrl = location.hostname
+
+const BaseUrl = computed(() => {
+  return `http://${localUrl}:${port.value}`
+})
 
 interface R<T> {
   code: number
@@ -48,13 +57,13 @@ interface R<T> {
 }
 
 function fetchConfig() {
-  return fetch(`${BaseUrl}/api/v1/config`, {
+  return fetch(`${BaseUrl.value}/api/v1/config`, {
     method: 'GET',
   }).then((res) => { return res.json() }) as Promise<R<AppConfig>>
 }
 
 function setConfig(config: AppConfig) {
-  return fetch(`${BaseUrl}/api/v1/config`, {
+  return fetch(`${BaseUrl.value}/api/v1/config`, {
     method: 'POST',
     body: JSON.stringify(config),
     headers: {
@@ -64,25 +73,25 @@ function setConfig(config: AppConfig) {
 }
 
 function doRestart() {
-  return fetch(`${BaseUrl}/api/v1/restart`, {
+  return fetch(`${BaseUrl.value}/api/v1/restart`, {
     method: 'POST',
   })
 }
 
 function doQuit() {
-  return fetch(`${BaseUrl}/api/v1/quit`, {
+  return fetch(`${BaseUrl.value}/api/v1/quit`, {
     method: 'POST',
   })
 }
 
 function doStart() {
-  return fetch(`${BaseUrl}/api/v1/start`, {
+  return fetch(`${BaseUrl.value}/api/v1/start`, {
     method: 'POST',
   })
 }
 
 function getStatus() {
-  return fetch(`${BaseUrl}/api/v1/status`, {
+  return fetch(`${BaseUrl.value}/api/v1/status`, {
     method: 'GET',
   }).then((res) => { return res.json() }) as Promise<R<{
     running: boolean

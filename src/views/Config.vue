@@ -8,6 +8,7 @@ const dateForm = reactive({
   dateStr: '',
   startTime: '',
   endTime: '',
+  sec: 0,
 })
 watch(dateForm, () => {
   if (!config?.value)
@@ -26,7 +27,7 @@ watch(dateForm, () => {
 
   const today = new Date()
   console.log(today)
-  config.value.appointment.startTime = Math.floor(today.setHours(Number(startTime[0]), Number(startTime[1])) / 1000)
+  config.value.appointment.startTime = Math.floor(today.setHours(Number(startTime[0]), Number(startTime[1]), dateForm.sec) / 1000)
   // config.value.appointment.endTime = Math.floor(today.setHours(Number(endTime[0]), Number(endTime[1])) / 1000)
 })
 
@@ -101,12 +102,31 @@ async function saveConfig() {
       </label>
       <label for="">
         <span>开始时间</span>
-        <input v-model="dateForm.startTime" type="time">
+        <input v-model="dateForm.startTime" class="w-1/2" type="time">
+        <!-- sec -->
+        <input v-model="dateForm.sec" class="w-1/4" type="number" placeholder="秒">
       </label>
       <!-- <label for="">
         <span>结束时间</span>
         <input v-model="dateForm.endTime" type="time">
       </label> -->
+    </div>
+    <h4 class="label-title">
+      系统设置
+    </h4>
+    <div class="forms">
+      <label for="">
+        <span>UA</span>
+        <input v-model="config.ua" type="text">
+      </label>
+      <label for="">
+        <span>程序端口</span>
+        <input v-model="config.port" type="text">
+      </label>
+      <label for="">
+        <span>速率限制（毫秒）</span>
+        <input v-model="config.speed" type="number" placeholder="ms">
+      </label>
     </div>
     <!-- 保存 -->
     <div class="flex">

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import GlobalConfig from './components/GlobalConfig.vue'
+
 const dark = useDark()
 const toggleDark = useToggle(dark)
 </script>
@@ -17,6 +19,7 @@ const toggleDark = useToggle(dark)
         <span v-else class="i-mdi-weather-sunny" />
       </button>
     </div>
+    <GlobalConfig />
     <router-view />
   </div>
 </template>
