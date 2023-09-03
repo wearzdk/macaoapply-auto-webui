@@ -29,7 +29,7 @@ watch(dateForm, () => {
   console.log(today)
   config.value.appointment.startTime = Math.floor(today.setHours(Number(startTime[0]), Number(startTime[1]), dateForm.sec) / 1000)
   // config.value.appointment.endTime = Math.floor(today.setHours(Number(endTime[0]), Number(endTime[1])) / 1000)
-})
+}, { immediate: true })
 
 onMounted(async () => {
   config.value = (await fetchConfig()).data
