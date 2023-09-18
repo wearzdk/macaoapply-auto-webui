@@ -70,23 +70,39 @@ async function saveConfig() {
       </label>
     </div>
     <!-- 验证码识别服务（超级鹰） -->
-    <h4 class="label-title">
-      验证码识别服务（超级鹰）
-    </h4>
-    <div class="forms">
-      <label for="">
-        <span>软件ID</span>
-        <input v-model="config.cjy.softId" type="text">
-      </label>
-      <label for="">
-        <span>用户名</span>
-        <input v-model="config.cjy.username" type="text">
-      </label>
-      <label for="">
-        <span>密码（md5）</span>
-        <input v-model="config.cjy.password" type="text">
-      </label>
-    </div>
+    <template v-if="config.captchaEngine === 'cjy'">
+      <h4 class="label-title">
+        验证码识别服务（超级鹰）
+      </h4>
+      <div class="forms">
+        <label for="">
+          <span>软件ID</span>
+          <input v-model="config.cjy.softId" type="text">
+        </label>
+        <label for="">
+          <span>用户名</span>
+          <input v-model="config.cjy.username" type="text">
+        </label>
+        <label for="">
+          <span>密码（md5）</span>
+          <input v-model="config.cjy.password" type="text">
+        </label>
+      </div>
+    </template>
+
+    <!-- 验证码识别服务（云码） -->
+    <template v-if="config.captchaEngine === 'yunma'">
+      <h4 class="label-title">
+        验证码识别服务（云码）
+      </h4>
+      <div class="forms">
+        <label for="">
+          <span>Token</span>
+          <input v-model="config.yunma.token" type="text">
+        </label>
+      </div>
+    </template>
+
     <!-- 申请信息 -->
     <h4 class="label-title">
       申请信息
@@ -115,6 +131,13 @@ async function saveConfig() {
       系统设置
     </h4>
     <div class="forms">
+      <label for="">
+        <span>验证码识别平台</span>
+        <select v-model="config.captchaEngine" name="">
+          <option value="cjy">超级鹰</option>
+          <option value="yunma">云码</option>
+        </select>
+      </label>
       <label for="">
         <span>UA</span>
         <input v-model="config.ua" type="text">
@@ -153,6 +176,9 @@ async function saveConfig() {
   @apply w-1/4;
 }
 .forms label input {
+  @apply input flex-1;
+}
+.forms label select {
   @apply input flex-1;
 }
 </style>

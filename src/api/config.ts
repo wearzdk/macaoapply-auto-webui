@@ -35,10 +35,18 @@ export interface AppointmentConfig {
   endTime: number
 }
 
+export interface YunMaOption {
+  token: string
+}
+
+type CaptchaEngine = 'cjy' | 'yunma'
+
 export interface AppConfig {
   cjy: CjyConfig
+  yunma: YunMaOption
   user: UserConfig
   appointment: AppointmentConfig
+  captchaEngine: CaptchaEngine
   ua: string
   port: string
   speed: number
