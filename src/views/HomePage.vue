@@ -60,8 +60,24 @@ createWebSocket()
         配置
       </h3>
       <Config />
+    </div>
+    <!-- right -->
+    <div class="flex flex-col w-full md:w-1/2 lg-3/5">
+      <div class="flex justify-between">
+        <h3 class="text-2xl font-bold">
+          日志
+        </h3>
+        <!-- <button
+          class="btn-base btn-primary px-2 ml-10px hover:bg-fill2"
+          @click="reconnect()"
+        >
+          重连
+        </button> -->
+      </div>
+      <Logs ref="logInst" class="mt-15px w-full h-68vh" height="auto" />
+
       <!-- 功能区 -->
-      <div class="border-t border-border mt-15px mr-20px">
+      <div class="border-t border-border mt-15px">
         <div class="flex justify-between items-center px-10px py-5px">
           <h4 class="text-lg font-bold">
             功能
@@ -95,21 +111,6 @@ createWebSocket()
           </button>
         </div>
       </div>
-    </div>
-    <!-- right -->
-    <div class="flex flex-col w-full md:w-1/2 lg-3/5">
-      <div class="flex justify-between">
-        <h3 class="text-2xl font-bold">
-          日志
-        </h3>
-        <!-- <button
-          class="btn-base btn-primary px-2 ml-10px hover:bg-fill2"
-          @click="reconnect()"
-        >
-          重连
-        </button> -->
-      </div>
-      <Logs ref="logInst" class="mt-15px w-full h-70vh" height="auto" />
     </div>
   </div>
 </template>

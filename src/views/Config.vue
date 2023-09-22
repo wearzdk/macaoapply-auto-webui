@@ -138,6 +138,15 @@ async function saveConfig() {
           <option value="yunma">云码</option>
         </select>
       </label>
+      <label for="enableCaptchaRefresh">
+        <span>启用验证码刷新</span>
+        <!-- 开关 -->
+        <input v-model="config.enableCaptchaRefresh" type="checkbox" name="enableCaptchaRefresh">
+      </label>
+      <label for="">
+        <span>刷新间隔(分钟)</span>
+        <input v-model="config.captchaRefreshRound" type="number">
+      </label>
       <label for="">
         <span>UA</span>
         <input v-model="config.ua" type="text">
@@ -177,6 +186,9 @@ async function saveConfig() {
 }
 .forms label input {
   @apply input flex-1;
+}
+.forms label input[type='checkbox'] {
+  @apply w-4 h-4 flex-none mr-10px cursor-pointer border-none outline-none;
 }
 .forms label select {
   @apply input flex-1;

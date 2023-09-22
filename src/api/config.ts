@@ -47,6 +47,8 @@ export interface AppConfig {
   user: UserConfig
   appointment: AppointmentConfig
   captchaEngine: CaptchaEngine
+  enableCaptchaRefresh: boolean
+  captchaRefreshRound: number
   ua: string
   port: string
   speed: number
