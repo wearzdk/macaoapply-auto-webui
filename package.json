@@ -26,7 +26,7 @@
     "@unocss/preset-icons": "^0.55.3",
     "@unocss/reset": "^0.54.1",
     "@unocss/transformer-directives": "^0.54.0",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue": "^4.4.0",
     "eslint": "^8.46.0",
     "typescript": "^5.1.6",
     "unocss": "^0.55.3",
